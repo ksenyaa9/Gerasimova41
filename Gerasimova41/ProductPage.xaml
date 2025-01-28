@@ -9,7 +9,102 @@
       Title="ProductPage" FontFamily="Comic Sans MS">
 
     <Grid>
-        <Button Content="Go" Click="Button_Click"></Button>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+            <StackPanel Orientation="Vertical">
+                
+           
+
+         
+
+
+            <StackPanel  Margin="10" Orientation="Vertical" HorizontalAlignment="Left">
+                <TextBlock Text="Поиск по наименованию" TextAlignment="Right" Width="210" FontSize="17"></TextBlock>
+                <TextBox Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Width="210" FontSize="15"></TextBox>
+                
+            </StackPanel>
+                <TextBlock Text="количество 0 из 0" Name="CountPage" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"></TextBlock>
+
+            </StackPanel>
+
+
+            <StackPanel  Orientation="Vertical" Margin="5">
+                <RadioButton Content="По возрастанию стоимости" GroupName="Sort" Width="250" FontSize="17" Name="RButtonUP" Checked="RButtonUP_Checked"></RadioButton>
+                <RadioButton Content="По убыванию стоимости" GroupName="Sort" Width="250" FontSize="17" Name="RButtonDown" Checked="RButtonDown_Checked"></RadioButton>
+            </StackPanel>
+
+            <StackPanel  Orientation="Vertical" Margin="10" >
+                <TextBlock Text="фильтрация по скидке" Width="200" FontSize="17"></TextBlock>
+                <ComboBox Name="ComboType" SelectionChanged="ComboType_SelectionChanged" FontSize="15" Width="220">
+                    <TextBlock TextAlignment="Center" >все диапозоны</TextBlock>
+                    <TextBlock TextAlignment="Center"> от 0 до 9.99% </TextBlock>
+                    <TextBlock TextAlignment="Center"> от 10 до 14.99% </TextBlock>
+                    <TextBlock TextAlignment="Center"> от 15 до 100% </TextBlock>
+                    
+                </ComboBox>
+
+            </StackPanel>
+           
+                
+
+
+
+        </WrapPanel>
         
+        
+        
+
+
+
+
+        <ListView Name="ServiceListView" Grid.Row="2" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition Width="620"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Width="200"  Grid.RowSpan="4" Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Center" >
+                            <Image.Source>
+                                <Binding Path="ProductPhotoPath">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            фото/picture.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+
+                        <TextBlock Text="{Binding ProductName}"  FontWeight="Bold" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Text="{Binding ProductDescription}" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding  ProductDiscountAmount, StringFormat={}{0} % }" FontWeight="Bold" Grid.Column="2" Grid.RowSpan="2" Margin="5" Grid.Row="2" HorizontalAlignment="Right" FontSize="21" ></TextBlock>
+                        <TextBlock Text="Скидка" Grid.Column="2" Margin="5" Grid.Row="0" HorizontalAlignment="Right" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding ProductManufacturer}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding ProductCost,StringFormat={}{0:0} рублей}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" FontSize="18" ></TextBlock>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
     </Grid>
 </Page>
